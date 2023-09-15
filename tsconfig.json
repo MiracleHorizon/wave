@@ -47,6 +47,12 @@
       ],
       "@store/*": [
         "./src/store/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@interfaces/*": [
+        "./src/shared/interfaces/*"
       ]
     }
   },
