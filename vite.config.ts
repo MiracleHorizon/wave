@@ -9,7 +9,8 @@ interface Alias {
 
 const aliases: Alias[] = [
   { find: '@root', path: './src' },
-  { find: '@assets', path: './src/assets' }
+  { find: '@assets', path: './src/assets' },
+  { find: '@store', path: './src/store' }
 ]
 
 const createAlias = ({ find, path }: Alias) => ({
