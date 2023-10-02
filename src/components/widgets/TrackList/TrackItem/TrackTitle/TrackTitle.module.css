@@ -1,0 +1,4 @@
+.root {
+  width: var(--trackTitleInfoWidth);
+  min-width: var(--trackTitleInfoWidth);
+}

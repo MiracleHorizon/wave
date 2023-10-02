@@ -9,7 +9,13 @@ interface Alias {
 
 const aliases: Alias[] = [
   { find: '@root', path: './src' },
-  { find: '@assets', path: './src/assets' }
+  { find: '@assets', path: './src/assets' },
+  { find: '@store', path: './src/store' },
+  { find: '@shared', path: './src/shared' },
+  { find: '@interfaces', path: './src/shared/interfaces' },
+  { find: '@components', path: './src/components' },
+  { find: '@layouts', path: './src/layouts' },
+  { find: '@hooks', path: './src/hooks' }
 ]
 
 const createAlias = ({ find, path }: Alias) => ({

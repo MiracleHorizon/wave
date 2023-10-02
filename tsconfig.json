@@ -44,6 +44,24 @@
       ],
       "@assets/*": [
         "./src/assets/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@interfaces/*": [
+        "./src/shared/interfaces/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
       ]
     }
   },

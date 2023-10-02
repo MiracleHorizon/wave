@@ -1,0 +1,5 @@
+.root {
+  width: var(--trackControlWidth);
+  min-width: var(--trackControlWidth);
+  margin-right: var(--trackInfoBlockMarginX);
+}
