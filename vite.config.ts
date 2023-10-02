@@ -12,7 +12,9 @@ const aliases: Alias[] = [
   { find: '@assets', path: './src/assets' },
   { find: '@store', path: './src/store' },
   { find: '@shared', path: './src/shared' },
-  { find: '@interfaces', path: './src/shared/interfaces' }
+  { find: '@interfaces', path: './src/shared/interfaces' },
+  { find: '@components', path: './src/components' },
+  { find: '@layouts', path: './src/layouts' }
 ]
 
 const createAlias = ({ find, path }: Alias) => ({

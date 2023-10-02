@@ -1,7 +1,9 @@
+import { DefaultLayout } from '@layouts/default.tsx'
+
 export function App() {
   return (
-    <div>
-      <h1 className='font-medium text-[24px]'>Hello, World!</h1>
-    </div>
+    <DefaultLayout>
+      <div></div>
+    </DefaultLayout>
   )
 }

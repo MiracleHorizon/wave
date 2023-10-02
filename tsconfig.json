@@ -53,6 +53,12 @@
       ],
       "@interfaces/*": [
         "./src/shared/interfaces/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
       ]
     }
   },
