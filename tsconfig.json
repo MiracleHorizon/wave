@@ -59,6 +59,9 @@
       ],
       "@layouts/*": [
         "./src/layouts/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
       ]
     }
   },

@@ -1,0 +1,5 @@
+.root {
+  width: var(--trackArtistsWidth);
+  min-width: var(--trackArtistsWidth);
+  margin-left: var(--trackInfoBlockMarginX);
+}
