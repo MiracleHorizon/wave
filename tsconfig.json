@@ -51,6 +51,9 @@
       "@shared/*": [
         "./src/shared/*"
       ],
+      "@helpers/*": [
+        "./src/shared/helpers/*"
+      ],
       "@interfaces/*": [
         "./src/shared/interfaces/*"
       ],

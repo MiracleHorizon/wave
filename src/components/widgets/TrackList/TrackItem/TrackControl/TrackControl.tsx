@@ -1,7 +1,7 @@
 import { twJoin } from 'tailwind-merge'
 
-import { PlaySvg } from '@shared/ui/PlaySvg.tsx'
-import { PauseSvg } from '@shared/ui/PauseSvg.tsx'
+import { IconPlay } from '@shared/ui/icons/IconPlay.tsx'
+import { IconPause } from '@shared/ui/icons/IconPause.tsx'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackControl.module.css'
 
@@ -16,7 +16,7 @@ export function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
       {isCurrentTrack ? (
         <>
           <span className='hidden group-hover:inline-block'>
-            {isPlaying ? <PauseSvg /> : <PlaySvg />}
+            {isPlaying ? <IconPause /> : <IconPlay />}
           </span>
           {isPlaying ? (
             <div className='h-[10px] w-[10px] animate-pulse rounded-full bg-yellow-300 group-hover:hidden' />

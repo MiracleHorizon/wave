@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 
-import type { ClassNameProps } from '@interfaces/ClassNameProps'
+import type { ClassNameProps } from '@interfaces/ClassNameProps.ts'
 
-export function PlaySvg({ className }: ClassNameProps) {
+export function IconPlay({ className }: ClassNameProps) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
