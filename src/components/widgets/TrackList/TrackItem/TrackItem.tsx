@@ -11,6 +11,7 @@ import {
   pauseCurrentTrack,
   playCurrentTrack,
   setCurrentTrack,
+  resetPausedTime,
   selectIsTrackCurrent
 } from '@store/slices/tracks'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
@@ -23,6 +24,7 @@ function TrackItem({ track, index }: Props) {
   const dispatch = useDispatch()
 
   function selectTrack() {
+    dispatch(resetPausedTime())
     dispatch(setCurrentTrack(track))
     dispatch(playCurrentTrack())
   }

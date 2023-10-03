@@ -6,7 +6,9 @@ import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 
 const initialState: State = {
   tracks: [],
-  currentTrack: null
+  currentTrack: null,
+  currentTime: 0,
+  pausedTime: 0
 }
 
 export const tracksSlice = createSlice({
@@ -43,6 +45,26 @@ export const tracksSlice = createSlice({
 
       track.isPlaying = false
       currentTrack.isPlaying = false
+
+      const currentTime = state.currentTime
+      if (currentTime > 0) {
+        state.pausedTime = currentTime
+      }
+    },
+    endCurrentTrack(state) {
+      const currentTrack = state.currentTrack
+      if (!currentTrack) return
+
+      state.currentTrack = null
+    },
+    setCurrentTime(state, action: PayloadAction<number>) {
+      state.currentTime = action.payload
+    },
+    setPausedTime(state, action: PayloadAction<number>) {
+      state.pausedTime = action.payload
+    },
+    resetPausedTime(state) {
+      state.pausedTime = initialState.pausedTime
     }
   }
 })
@@ -51,5 +73,9 @@ export const {
   setTracks,
   setCurrentTrack,
   playCurrentTrack,
-  pauseCurrentTrack
+  pauseCurrentTrack,
+  endCurrentTrack,
+  setCurrentTime,
+  setPausedTime,
+  resetPausedTime
 } = tracksSlice.actions
