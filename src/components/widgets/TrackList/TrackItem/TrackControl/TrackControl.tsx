@@ -6,6 +6,8 @@ import { IconPause } from '@shared/ui/icons/IconPause.tsx'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackControl.module.css'
 
+const iconClassName: string = 'w-[26px] h-[26px]'
+
 function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
   return (
     <div
@@ -17,7 +19,11 @@ function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
       {isCurrentTrack ? (
         <>
           <span className='hidden group-hover:inline-block'>
-            {isPlaying ? <IconPause /> : <IconPlay />}
+            {isPlaying ? (
+              <IconPause className={iconClassName} />
+            ) : (
+              <IconPlay className={iconClassName} />
+            )}
           </span>
           {isPlaying ? (
             <div className='h-[10px] w-[10px] animate-pulse rounded-full bg-yellow-300 group-hover:hidden' />
