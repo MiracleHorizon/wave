@@ -1,14 +1,16 @@
+import { memo } from 'react'
 import { twJoin, twMerge } from 'tailwind-merge'
 
 import { formatTimeValue } from '@helpers/formatTimeValue.ts'
 
-export function Time({ value, className }: Props) {
+function Time({ value, className }: Props) {
   return (
     <div
       className={twMerge(
         twJoin(
-          'absolute top-0 flex h-full items-center justify-center text-[11px]',
-          'z-[20] text-white opacity-100 group-hover:opacity-100'
+          'absolute top-0 flex items-center justify-center text-[11px]',
+          'z-[20] h-full text-white opacity-0 group-hover:opacity-100',
+          'transition-opacity duration-[50] ease-in'
         ),
         className
       )}
@@ -17,6 +19,10 @@ export function Time({ value, className }: Props) {
     </div>
   )
 }
+
+const MemoizedTime = memo(Time)
+
+export { MemoizedTime as Time }
 
 interface Props {
   value: number

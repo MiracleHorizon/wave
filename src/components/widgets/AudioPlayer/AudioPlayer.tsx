@@ -5,16 +5,11 @@ import {
   useState,
   type MouseEvent
 } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Timeline } from './Timeline'
 import {
-  endCurrentTrack,
-  pauseCurrentTrack,
-  playCurrentTrack,
-  setCurrentTime,
-  setPausedTime,
-  resetPausedTime,
+  useTrackActions,
   selectCurrentTrack,
   selectCurrentTime,
   selectPausedTime
@@ -29,15 +24,29 @@ export function AudioPlayer() {
   const currentTrack = useSelector(selectCurrentTrack)
   const currentTime = useSelector(selectCurrentTime)
   const pausedTime = useSelector(selectPausedTime)
-  const dispatch = useDispatch()
 
-  const handlePlay = useCallback(() => {
-    dispatch(playCurrentTrack())
-  }, [dispatch])
+  const {
+    playCurrentTrack,
+    pauseCurrentTrack,
+    endCurrentTrack,
+    setCurrentTime,
+    setPausedTime,
+    resetPausedTime
+  } = useTrackActions()
 
-  const handlePause = useCallback(() => {
-    dispatch(pauseCurrentTrack())
-  }, [dispatch])
+  const handlePlayToggle = useCallback(() => {
+    if (!currentTrack) return
+
+    try {
+      if (currentTrack.isPlaying) {
+        pauseCurrentTrack()
+      } else {
+        playCurrentTrack()
+      }
+    } catch {
+      pauseCurrentTrack()
+    }
+  }, [currentTrack, pauseCurrentTrack, playCurrentTrack])
 
   const handleTimelineClick = useCallback(
     (ev: MouseEvent) => {
@@ -54,15 +63,11 @@ export function AudioPlayer() {
       audio.currentTime = clickedTime
       setCurrentTimePercent(progressPercent)
 
-      if (!currentTrack.isPlaying) {
-        if (currentTime > 0 && clickedTime !== pausedTime) {
-          dispatch(setPausedTime(clickedTime))
-        }
-
-        handlePlay()
+      if (currentTime > 0 && clickedTime !== pausedTime) {
+        setPausedTime(clickedTime)
       }
     },
-    [currentTrack, currentTime, pausedTime, handlePlay, dispatch]
+    [currentTrack, currentTime, pausedTime, setPausedTime]
   )
 
   const handleTimeUpdate = () => {
@@ -71,7 +76,7 @@ export function AudioPlayer() {
     if (!audio || !currentTrack) return
     if (currentTime !== 0 && audio.currentTime === 0) return
 
-    dispatch(setCurrentTime(audio.currentTime))
+    setCurrentTime(audio.currentTime)
     setCurrentTimePercent(audio.currentTime / (currentTrack.duration / 100))
   }
 
@@ -82,7 +87,7 @@ export function AudioPlayer() {
 
     const handleEnd = () => {
       audio.currentTime = 0
-      dispatch(endCurrentTrack())
+      endCurrentTrack()
     }
 
     audio.load()
@@ -91,31 +96,29 @@ export function AudioPlayer() {
     return () => {
       audio.removeEventListener('ended', handleEnd)
     }
-  }, [currentTrack, dispatch])
+  }, [currentTrack, endCurrentTrack])
 
   useEffect(() => {
     const audio = audioRef.current
 
     if (!audio || !currentTrack) return
 
-    const handleResetPausedTime = () => dispatch(resetPausedTime())
-
     try {
       if (currentTrack.isPlaying) {
         if (pausedTime > 0) {
           audio.currentTime = pausedTime
-          handleResetPausedTime()
+          resetPausedTime()
         }
 
-        audio.play().then(handleResetPausedTime)
+        audio.play().then(resetPausedTime)
       } else {
         audio.pause()
       }
     } catch {
       audio.pause()
-      handlePause()
+      pauseCurrentTrack()
     }
-  }, [currentTrack, pausedTime, handlePause, dispatch])
+  }, [currentTrack, pauseCurrentTrack, pausedTime, resetPausedTime])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -123,16 +126,8 @@ export function AudioPlayer() {
     if (!audio || !currentTrack) return
 
     const handleKeyboardTogglePlay = (ev: KeyboardEvent) => {
-      if (ev.code !== 'Space') return
-
-      try {
-        if (currentTrack.isPlaying) {
-          handlePause()
-        } else {
-          handlePlay()
-        }
-      } catch {
-        handlePause()
+      if (ev.code === 'Space') {
+        handlePlayToggle()
       }
     }
 
@@ -141,22 +136,20 @@ export function AudioPlayer() {
     return () => {
       window.removeEventListener('keydown', handleKeyboardTogglePlay)
     }
-  }, [currentTrack, handlePause, handlePlay])
+  }, [currentTrack, handlePlayToggle])
 
   return (
-    <section className='mt-[24px] h-[110px] w-screen bg-white shadow'>
+    <section className='mt-[24px] h-[80px] w-screen bg-white shadow'>
       <audio
         ref={audioRef}
         src={currentTrack?.audioFilePath}
         onTimeUpdate={handleTimeUpdate}
       />
-      <div className='h-full w-full'>
+      <div className='flex h-full w-full flex-col'>
         <Timeline
           ref={timelineRef}
-          currentTime={currentTime}
           currentTimePercent={currentTimePercent}
           handleTimelineClick={handleTimelineClick}
-          duration={currentTrack?.duration}
         />
       </div>
     </section>

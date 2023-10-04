@@ -1,10 +1,15 @@
 import { forwardRef, type MouseEvent } from 'react'
+import { useSelector } from 'react-redux'
 import { twJoin } from 'tailwind-merge'
 
 import { Time } from './Time.tsx'
+import { selectCurrentTime, selectCurrentTrack } from '@store/slices/tracks'
 
 export const Timeline = forwardRef<HTMLDivElement, Props>(
-  ({ currentTime, currentTimePercent, handleTimelineClick, duration }, ref) => {
+  ({ currentTimePercent, handleTimelineClick }, ref) => {
+    const currentTrack = useSelector(selectCurrentTrack)
+    const currentTime = useSelector(selectCurrentTime)
+
     const percentValue = currentTimePercent + '%'
 
     return (
@@ -24,8 +29,12 @@ export const Timeline = forwardRef<HTMLDivElement, Props>(
           style={{ left: percentValue }}
           className='absolute z-10 hidden h-[10px] w-[10px] translate-y-[-25%] rounded-full bg-yellow-400'
         />
-        {currentTime > 1 && <Time value={currentTime} className='left-[5px]' />}
-        {duration && <Time value={duration} className='right-[5px]' />}
+        {currentTrack && (
+          <>
+            <Time value={currentTime} className='left-[5px]' />
+            <Time value={currentTrack.duration} className='right-[5px]' />
+          </>
+        )}
       </div>
     )
   }
@@ -33,8 +42,6 @@ export const Timeline = forwardRef<HTMLDivElement, Props>(
 
 /* eslint no-unused-vars: 0 */
 interface Props {
-  currentTime: number
   currentTimePercent: number
   handleTimelineClick: (ev: MouseEvent) => void
-  duration?: number
 }

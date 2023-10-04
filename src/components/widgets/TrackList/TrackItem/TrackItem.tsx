@@ -1,18 +1,15 @@
 import { memo } from 'react'
 import { twJoin } from 'tailwind-merge'
-import { useDispatch } from 'react-redux'
 
 import { TrackTitle } from './TrackTitle'
 import { TrackControl } from './TrackControl'
 import { TrackArtists } from './TrackArtists'
 import { TrackDuration } from './TrackDuration'
-import { useTypedSelector } from '@hooks/useTypedSelector.ts'
+import { useTypedSelector } from '@store/hooks/useTypedSelector.ts'
 import {
   pauseCurrentTrack,
-  playCurrentTrack,
-  setCurrentTrack,
-  resetPausedTime,
-  selectIsTrackCurrent
+  selectIsTrackCurrent,
+  useTrackActions
 } from '@store/slices/tracks'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 
@@ -20,17 +17,21 @@ function TrackItem({ track, index }: Props) {
   const isCurrentTrack = useTypedSelector(state =>
     selectIsTrackCurrent(state, track.id)
   )
+  const { resetPausedTime, setCurrentTrack, playCurrentTrack } =
+    useTrackActions()
 
-  const dispatch = useDispatch()
-
-  function selectTrack() {
-    dispatch(resetPausedTime())
-    dispatch(setCurrentTrack(track))
-    dispatch(playCurrentTrack())
+  function handleSelectTrack() {
+    resetPausedTime()
+    setCurrentTrack(track)
+    playCurrentTrack()
   }
 
-  function toggleTrackPlay() {
-    dispatch((track.isPlaying ? pauseCurrentTrack : playCurrentTrack)())
+  function handlePlayToggle() {
+    if (track.isPlaying) {
+      pauseCurrentTrack()
+    } else {
+      playCurrentTrack()
+    }
   }
 
   return (
@@ -39,7 +40,7 @@ function TrackItem({ track, index }: Props) {
         'max-sm:pr-[4px] group flex h-[44px] w-full cursor-pointer items-center',
         'border-b-[1px] border-solid border-transparent text-[15px] hover:border-gray-300'
       )}
-      onClick={isCurrentTrack ? toggleTrackPlay : selectTrack}
+      onClick={isCurrentTrack ? handlePlayToggle : handleSelectTrack}
     >
       <TrackControl
         order={index + 1}
