@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import { formatTimeValue } from '@helpers/formatTimeValue.ts'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackDuration.module.css'
 
-export function TrackDuration({ duration }: Pick<PlayerTrack, 'duration'>) {
+function TrackDuration({ duration }: Pick<PlayerTrack, 'duration'>) {
   return (
     <div
       className={twJoin(
@@ -18,3 +19,7 @@ export function TrackDuration({ duration }: Pick<PlayerTrack, 'duration'>) {
     </div>
   )
 }
+
+const MemoizedTrackDuration = memo(TrackDuration)
+
+export { MemoizedTrackDuration as TrackDuration }

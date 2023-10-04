@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import { IconPlay } from '@shared/ui/icons/IconPlay.tsx'
@@ -5,7 +6,9 @@ import { IconPause } from '@shared/ui/icons/IconPause.tsx'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackControl.module.css'
 
-export function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
+const iconClassName: string = 'w-[26px] h-[26px]'
+
+function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
   return (
     <div
       className={twJoin(
@@ -16,7 +19,11 @@ export function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
       {isCurrentTrack ? (
         <>
           <span className='hidden group-hover:inline-block'>
-            {isPlaying ? <IconPause /> : <IconPlay />}
+            {isPlaying ? (
+              <IconPause className={iconClassName} />
+            ) : (
+              <IconPlay className={iconClassName} />
+            )}
           </span>
           {isPlaying ? (
             <div className='h-[10px] w-[10px] animate-pulse rounded-full bg-yellow-300 group-hover:hidden' />
@@ -30,6 +37,10 @@ export function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
     </div>
   )
 }
+
+const MemoizedTrackControl = memo(TrackControl)
+
+export { MemoizedTrackControl as TrackControl }
 
 interface Props extends Pick<PlayerTrack, 'isPlaying'> {
   order: number

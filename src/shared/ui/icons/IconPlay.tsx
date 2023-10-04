@@ -1,23 +1,18 @@
-import { twMerge } from 'tailwind-merge'
-
 import type { ClassNameProps } from '@interfaces/ClassNameProps.ts'
 
-export function IconPlay({ className }: ClassNameProps) {
+export function IconPlay(props: ClassNameProps) {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
+      width={32}
+      height={32}
+      viewBox='0 0 32 32'
       fill='none'
-      viewBox='0 0 24 24'
-      stroke='currentColor'
-      strokeWidth={1.5}
-      width={24}
-      height={24}
-      className={twMerge('mr-[-2px]', className)}
+      xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <path
-        strokeLinecap='round'
-        strokeLinejoin='round'
-        d='M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z'
+        d='M10.6666 6.6548C10.6666 6.10764 11.2894 5.79346 11.7295 6.11861L24.377 15.4634C24.7377 15.7298 24.7377 16.2692 24.377 16.5357L11.7295 25.8813C11.2894 26.2065 10.6666 25.8923 10.6666 25.3451L10.6666 6.6548Z'
+        fill='currentColor'
       />
     </svg>
   )

@@ -1,19 +1,18 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { TrackList } from '@components/widgets/TrackList'
-import { selectIsTracksEmpty, setTracks } from '@store/slices/tracks'
+import { selectIsTracksEmpty, useTrackActions } from '@store/slices/tracks'
 import { tracks } from '@assets/data.ts'
 
 export function Home() {
   const isTracksEmpty = useSelector(selectIsTracksEmpty)
-
-  const dispatch = useDispatch()
+  const { setTracks } = useTrackActions()
 
   useEffect(() => {
     if (!isTracksEmpty) return
-    dispatch(setTracks(tracks))
-  }, [dispatch, isTracksEmpty])
+    setTracks(tracks)
+  }, [isTracksEmpty, setTracks])
 
   return (
     <div className='h-full w-full'>

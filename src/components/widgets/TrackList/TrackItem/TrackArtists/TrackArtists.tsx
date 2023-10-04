@@ -1,9 +1,9 @@
-import { Fragment, type MouseEvent } from 'react'
+import { Fragment, memo, type MouseEvent } from 'react'
 
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackArtists.module.css'
 
-export function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
+function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
   function handleArtistClick(ev: MouseEvent) {
     ev.stopPropagation()
   }
@@ -27,3 +27,7 @@ export function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
     </div>
   )
 }
+
+const MemoizedTrackArtists = memo(TrackArtists)
+
+export { MemoizedTrackArtists as TrackArtists }
