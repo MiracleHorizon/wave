@@ -1,6 +1,6 @@
 import { useActions } from '@store/hooks/useActions.ts'
-import { tracksSlice } from './slice.ts'
+import { trackActions } from './slice.ts'
 
 export function useTrackActions() {
-  return useActions(tracksSlice.actions)
+  return useActions(trackActions)
 }

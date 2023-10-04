@@ -69,13 +69,4 @@ export const tracksSlice = createSlice({
   }
 })
 
-export const {
-  setTracks,
-  setCurrentTrack,
-  playCurrentTrack,
-  pauseCurrentTrack,
-  endCurrentTrack,
-  setCurrentTime,
-  setPausedTime,
-  resetPausedTime
-} = tracksSlice.actions
+export const trackActions = tracksSlice.actions

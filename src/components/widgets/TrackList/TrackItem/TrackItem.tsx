@@ -6,19 +6,19 @@ import { TrackControl } from './TrackControl'
 import { TrackArtists } from './TrackArtists'
 import { TrackDuration } from './TrackDuration'
 import { useTypedSelector } from '@store/hooks/useTypedSelector.ts'
-import {
-  pauseCurrentTrack,
-  selectIsTrackCurrent,
-  useTrackActions
-} from '@store/slices/tracks'
+import { selectIsTrackCurrent, useTrackActions } from '@store/slices/tracks'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 
 function TrackItem({ track, index }: Props) {
   const isCurrentTrack = useTypedSelector(state =>
     selectIsTrackCurrent(state, track.id)
   )
-  const { resetPausedTime, setCurrentTrack, playCurrentTrack } =
-    useTrackActions()
+  const {
+    resetPausedTime,
+    setCurrentTrack,
+    playCurrentTrack,
+    pauseCurrentTrack
+  } = useTrackActions()
 
   function handleSelectTrack() {
     resetPausedTime()
