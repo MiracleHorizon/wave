@@ -1,0 +1,10 @@
+/node_modules
+/.idea
+/.git
+/.github
+/dist
+/coverage
+
+.eslintignore
+*.log
+*.json
