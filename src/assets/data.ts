@@ -4,6 +4,10 @@ import type { Track } from '@interfaces/Track'
 import theTrailMp3 from '@assets/audio/the_trail.mp3'
 import heartsOfStoneMp3 from '@assets/audio/hearts_of_stone.mp3'
 import silverForMonstersMp3 from '@assets/audio/silver_for_monsters.mp3'
+import steelForHumansMp3 from '@assets/audio/steel_for_humans.mp3'
+import maleniaBladeOfMiquellaMp3 from '@assets/audio/malenia_blade_of_miquella.mp3'
+import godfreyFirstEldenLordMp3 from '@assets/audio/godfrey_first_elden_lord.mp3'
+import theFinalBattleMp3 from '@assets/audio/the_final_battle.mp3'
 
 /* eslint camelcase: 0 */
 export const tracks: Track[] = [
@@ -39,5 +43,49 @@ export const tracks: Track[] = [
     explicit: true,
     duration: 60 * 2 + 16,
     release_date: new Date('August 26, 2015 00:00:00').toString()
+  },
+  {
+    id: v4(),
+    title: '...Steel For Humans',
+    artists: ['Marcin Przybyłowicz'],
+    album: 'The Witcher 3: Wild Hunt (Official Soundtrack)',
+    audioFilePath: steelForHumansMp3,
+    coverPath: null,
+    explicit: false,
+    duration: 87,
+    release_date: new Date('August 26, 2015 00:00:00').toString()
+  },
+  {
+    id: v4(),
+    title: 'Malenia, Blade of Miquella',
+    artists: ['Yuka Kitamura'],
+    album: 'Elden Ring (Official Game Soundtrack)',
+    audioFilePath: maleniaBladeOfMiquellaMp3,
+    coverPath: null,
+    explicit: false,
+    duration: 60 * 3 + 44,
+    release_date: new Date('September 9, 2022 00:00:00').toString()
+  },
+  {
+    id: v4(),
+    title: 'Godfrey, First Elden Lord',
+    artists: ['Tai Tomisawa'],
+    album: 'Elden Ring (Official Game Soundtrack)',
+    audioFilePath: godfreyFirstEldenLordMp3,
+    coverPath: null,
+    explicit: false,
+    duration: 60 * 3 + 16,
+    release_date: new Date('September 9, 2022 00:00:00').toString()
+  },
+  {
+    id: v4(),
+    title: 'The Final Battle',
+    artists: ['Tsukaha Saitoh'],
+    album: 'Elden Ring (Official Game Soundtrack)',
+    audioFilePath: theFinalBattleMp3,
+    coverPath: null,
+    explicit: false,
+    duration: 60 * 4 + 58,
+    release_date: new Date('September 9, 2022 00:00:00').toString()
   }
 ]
