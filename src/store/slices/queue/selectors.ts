@@ -49,7 +49,10 @@ export function selectPausedTime(state: RootState): number {
 }
 
 export function selectIsForwardSkipAvailable(state: RootState): boolean {
-  const queue = state.queue.queue
+  const queueSlice = state.queue
+  const queue = queueSlice.withShuffle
+    ? queueSlice.shuffledQueue
+    : queueSlice.queue
   if (queue.length === 0) {
     return false
   }
@@ -64,7 +67,10 @@ export function selectIsForwardSkipAvailable(state: RootState): boolean {
 }
 
 export function selectIsBackwardSkipAvailable(state: RootState): boolean {
-  const queue = state.queue.queue
+  const queueSlice = state.queue
+  const queue = queueSlice.withShuffle
+    ? queueSlice.shuffledQueue
+    : queueSlice.queue
   if (queue.length === 0) {
     return false
   }
