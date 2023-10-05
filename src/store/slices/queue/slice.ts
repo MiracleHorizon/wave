@@ -1,8 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import shuffle from 'lodash.shuffle'
 
-import { RepeatMode, type State } from './types.ts'
+import { getInitialVolumeState } from './helpers.ts'
+import { MAX_VOLUME, MIN_AUDIO_VOLUME, MIN_VOLUME } from './const.ts'
+import { RepeatMode, type State, type VolumeState } from './types.ts'
+import { VOLUME_ITEM_KEY } from '@shared/const.ts'
 import type { Track } from '@interfaces/Track.ts'
+
+const initialVolumeState = getInitialVolumeState()
 
 const initialState: State = {
   queue: [],
@@ -11,7 +16,8 @@ const initialState: State = {
   repeatMode: RepeatMode.NO_REPEAT,
   currentTrack: null,
   currentTime: 0,
-  pausedTime: 0
+  pausedTime: 0,
+  ...initialVolumeState
 }
 
 export const queueSlice = createSlice({
@@ -74,6 +80,39 @@ export const queueSlice = createSlice({
     },
     resetPausedTime(state) {
       state.pausedTime = initialState.pausedTime
+    },
+    setVolume(state, action: PayloadAction<number>) {
+      const value = action.payload
+
+      if (value < MIN_AUDIO_VOLUME || value > MAX_VOLUME) return
+
+      if (value <= MIN_VOLUME) {
+        state.isMuted = true
+      }
+
+      if (state.isMuted === true && value > MIN_VOLUME) {
+        state.isMuted = false
+      }
+
+      state.volume = action.payload
+
+      localStorage.setItem(
+        VOLUME_ITEM_KEY,
+        JSON.stringify({
+          volume: state.volume,
+          isMuted: state.isMuted
+        } as VolumeState)
+      )
+    },
+    toggleVolumeMute(state) {
+      state.isMuted = !state.isMuted
+      localStorage.setItem(
+        VOLUME_ITEM_KEY,
+        JSON.stringify({
+          volume: state.volume,
+          isMuted: state.isMuted
+        } as VolumeState)
+      )
     },
     skipForward(state) {
       const queue = state.withShuffle ? state.shuffledQueue : state.queue

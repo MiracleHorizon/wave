@@ -7,6 +7,9 @@ const tailwindConfig = {
         'max-mobile': {
           max: '475px'
         }
+      },
+      transitionDuration: {
+        50: '50ms'
       }
     }
   },

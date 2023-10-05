@@ -48,6 +48,14 @@ export function selectPausedTime(state: RootState): number {
   return state.queue.pausedTime
 }
 
+export function selectVolume(state: RootState): number {
+  return state.queue.volume
+}
+
+export function selectIsVolumeMuted(state: RootState): boolean {
+  return state.queue.isMuted
+}
+
 export function selectIsForwardSkipAvailable(state: RootState): boolean {
   const queueSlice = state.queue
   const queue = queueSlice.withShuffle
