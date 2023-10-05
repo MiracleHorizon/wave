@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { twJoin } from 'tailwind-merge'
 
 import { Time } from './Time.tsx'
-import { selectCurrentTime, selectCurrentTrack } from '@store/slices/tracks'
+import { selectCurrentTime, selectCurrentTrack } from '@store/slices/queue'
 
 export const Timeline = forwardRef<HTMLDivElement, Props>(
   ({ currentTimePercent, handleTimelineClick }, ref) => {

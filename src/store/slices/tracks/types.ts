@@ -1,8 +1,5 @@
-import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
+import type { Track } from '@interfaces/Track.ts'
 
 export interface State {
-  tracks: PlayerTrack[]
-  currentTrack: PlayerTrack | null
-  currentTime: number
-  pausedTime: number
+  tracks: Track[]
 }
