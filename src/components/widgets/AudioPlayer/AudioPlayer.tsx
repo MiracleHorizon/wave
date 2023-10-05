@@ -8,6 +8,7 @@ import {
 import { useSelector } from 'react-redux'
 
 import { Timeline } from './Timeline'
+import { AudioControls } from './Controls'
 import {
   useQueueActions,
   selectCurrentTrack,
@@ -151,6 +152,7 @@ export function AudioPlayer() {
           currentTimePercent={currentTimePercent}
           handleTimelineClick={handleTimelineClick}
         />
+        <AudioControls handlePlayToggle={handlePlayToggle} />
       </div>
     </section>
   )
