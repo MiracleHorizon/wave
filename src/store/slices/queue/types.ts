@@ -1,6 +1,6 @@
-import { PlayerTrack } from '@interfaces/PlayerTrack.ts'
+import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 
-export interface State {
+export interface State extends VolumeState {
   queue: PlayerTrack[]
   shuffledQueue: PlayerTrack[]
   withShuffle: boolean
@@ -8,6 +8,11 @@ export interface State {
   currentTrack: PlayerTrack | null
   currentTime: number
   pausedTime: number
+}
+
+export interface VolumeState {
+  volume: number
+  isMuted: boolean
 }
 
 /* eslint no-unused-vars: 0 */

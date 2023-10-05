@@ -13,7 +13,9 @@ import {
   useQueueActions,
   selectCurrentTrack,
   selectCurrentTime,
-  selectPausedTime
+  selectPausedTime,
+  selectVolume,
+  selectIsVolumeMuted
 } from '@store/slices/queue'
 
 export function AudioPlayer() {
@@ -25,6 +27,8 @@ export function AudioPlayer() {
   const currentTrack = useSelector(selectCurrentTrack)
   const currentTime = useSelector(selectCurrentTime)
   const pausedTime = useSelector(selectPausedTime)
+  const volume = useSelector(selectVolume)
+  const isVolumeMuted = useSelector(selectIsVolumeMuted)
 
   const {
     playCurrentTrack,
@@ -138,6 +142,14 @@ export function AudioPlayer() {
       window.removeEventListener('keydown', handleKeyboardTogglePlay)
     }
   }, [currentTrack, handlePlayToggle])
+
+  useEffect(() => {
+    const audio = audioRef.current
+
+    if (!audio) return
+
+    audio.volume = isVolumeMuted ? 0 : volume
+  }, [volume, isVolumeMuted])
 
   return (
     <section className='mt-[24px] h-[80px] w-screen bg-white shadow'>
