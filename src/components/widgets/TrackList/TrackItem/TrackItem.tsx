@@ -7,18 +7,25 @@ import { TrackArtists } from './TrackArtists'
 import { TrackDuration } from './TrackDuration'
 import { useTypedSelector } from '@store/hooks/useTypedSelector.ts'
 import {
-  pauseCurrentTrack,
+  useQueueActions,
   selectIsTrackCurrent,
-  useTrackActions
-} from '@store/slices/tracks'
-import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
+  selectIsTrackPlaying
+} from '@store/slices/queue'
+import type { Track } from '@interfaces/Track.ts'
 
 function TrackItem({ track, index }: Props) {
   const isCurrentTrack = useTypedSelector(state =>
     selectIsTrackCurrent(state, track.id)
   )
-  const { resetPausedTime, setCurrentTrack, playCurrentTrack } =
-    useTrackActions()
+  const isPlaying = useTypedSelector(state =>
+    selectIsTrackPlaying(state, track.id)
+  )
+  const {
+    resetPausedTime,
+    setCurrentTrack,
+    playCurrentTrack,
+    pauseCurrentTrack
+  } = useQueueActions()
 
   function handleSelectTrack() {
     resetPausedTime()
@@ -27,7 +34,7 @@ function TrackItem({ track, index }: Props) {
   }
 
   function handlePlayToggle() {
-    if (track.isPlaying) {
+    if (isPlaying) {
       pauseCurrentTrack()
     } else {
       playCurrentTrack()
@@ -44,7 +51,7 @@ function TrackItem({ track, index }: Props) {
     >
       <TrackControl
         order={index + 1}
-        isPlaying={track.isPlaying}
+        isPlaying={isPlaying}
         isCurrentTrack={isCurrentTrack}
       />
       <TrackTitle title={track.title} />
@@ -59,6 +66,6 @@ const MemoizedTrackItem = memo(TrackItem)
 export { MemoizedTrackItem as TrackItem }
 
 interface Props {
-  track: PlayerTrack
+  track: Track
   index: number
 }

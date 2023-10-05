@@ -51,6 +51,9 @@
       "@shared/*": [
         "./src/shared/*"
       ],
+      "@ui/*": [
+        "./src/shared/ui/*"
+      ],
       "@helpers/*": [
         "./src/shared/helpers/*"
       ],
@@ -62,9 +65,6 @@
       ],
       "@layouts/*": [
         "./src/layouts/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
       ]
     }
   },

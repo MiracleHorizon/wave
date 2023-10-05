@@ -1,4 +1,3 @@
-export * from './slice.ts'
-export * from './types.ts'
-export * from './selectors.ts'
+export { tracksSlice } from './slice.ts'
 export { useTrackActions } from './actions.ts'
+export * from './selectors.ts'

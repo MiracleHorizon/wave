@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { twJoin } from 'tailwind-merge'
 
-import { IconPlay } from '@shared/ui/icons/IconPlay.tsx'
-import { IconPause } from '@shared/ui/icons/IconPause.tsx'
+import { IconPlay } from '@ui/icons/IconPlay.tsx'
+import { IconPause } from '@ui/icons/IconPause.tsx'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackControl.module.css'
 

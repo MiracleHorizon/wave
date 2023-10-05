@@ -8,12 +8,13 @@ import {
 import { useSelector } from 'react-redux'
 
 import { Timeline } from './Timeline'
+import { AudioControls } from './Controls'
 import {
-  useTrackActions,
+  useQueueActions,
   selectCurrentTrack,
   selectCurrentTime,
   selectPausedTime
-} from '@store/slices/tracks'
+} from '@store/slices/queue'
 
 export function AudioPlayer() {
   const [currentTimePercent, setCurrentTimePercent] = useState(0)
@@ -32,7 +33,7 @@ export function AudioPlayer() {
     setCurrentTime,
     setPausedTime,
     resetPausedTime
-  } = useTrackActions()
+  } = useQueueActions()
 
   const handlePlayToggle = useCallback(() => {
     if (!currentTrack) return
@@ -151,6 +152,7 @@ export function AudioPlayer() {
           currentTimePercent={currentTimePercent}
           handleTimelineClick={handleTimelineClick}
         />
+        <AudioControls handlePlayToggle={handlePlayToggle} />
       </div>
     </section>
   )
