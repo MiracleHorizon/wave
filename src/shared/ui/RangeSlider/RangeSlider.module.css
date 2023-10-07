@@ -3,8 +3,7 @@
   -moz-appearance: none;
 }
 
-.root::-webkit-slider-thumb,
-.root::-moz-range-thumb {
+.thumb {
   -webkit-appearance: none;
   -moz-appearance: none;
   box-shadow:
@@ -14,11 +13,18 @@
     rgba(0, 0, 0, 0.17) 0 12px 13px,
     rgba(0, 0, 0, 0.09) 0 -3px 5px;
 
-  @apply z-10 h-[22px] w-[22px] cursor-ns-resize bg-neutral-800;
+  @apply z-10 cursor-ns-resize bg-neutral-800;
   @apply rounded-full border-[2px] border-solid border-neutral-300;
 }
 
-.root::-webkit-slider-thumb:hover,
-.root::-moz-range-thumb:hover {
+.thumb:hover {
   @apply scale-[115%] transition-all duration-100 ease-out;
+}
+
+.root::-webkit-slider-thumb {
+  @apply thumb h-[22px] w-[22px];
+}
+
+.root::-moz-range-thumb {
+  @apply thumb h-[17px] w-[17px];
 }
