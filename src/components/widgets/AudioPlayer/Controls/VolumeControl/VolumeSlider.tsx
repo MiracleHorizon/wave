@@ -68,15 +68,15 @@ export function VolumeSlider({ isHover }: Props) {
           <div
             style={sliderContainerStyle}
             className={twJoin(
-              'relative left-0 h-[44px] w-[200px] min-w-[200px] rounded-[6px] ',
+              'relative left-0 h-[44px] w-[200px] min-w-[200px] rounded-[6px]',
               'z-10 flex origin-top-left items-center justify-center bg-neutral-800'
             )}
           >
             <div className='relative flex w-full items-center justify-center px-[16px]'>
               <div
                 className={twJoin(
-                  'absolute bottom-1/2 left-1/2 right-1/2 top-1/2',
-                  'h-[22px] w-[1px] -translate-x-1/2 -translate-y-1/2 bg-neutral-400'
+                  'absolute bottom-1/2 left-1/2 right-1/2 top-1/2 bg-neutral-400',
+                  'h-[22px] w-[1px] -translate-x-1/2 -translate-y-1/2'
                 )}
               />
               <RangeSlider
