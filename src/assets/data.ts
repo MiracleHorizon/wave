@@ -9,6 +9,10 @@ import maleniaBladeOfMiquellaMp3 from '@assets/audio/malenia_blade_of_miquella.m
 import godfreyFirstEldenLordMp3 from '@assets/audio/godfrey_first_elden_lord.mp3'
 import theFinalBattleMp3 from '@assets/audio/the_final_battle.mp3'
 
+import eldenRingOstCoverPng from './elden_ring_ost_cover.png'
+import theWitcher3OstCoverPng from './the_witcher_3_ost_cover.png'
+import theWitcher3HosOstCoverPng from './the_witcher_3_hos_ost_cover.png'
+
 /* eslint camelcase: 0 */
 export const tracks: Track[] = [
   {
@@ -17,7 +21,7 @@ export const tracks: Track[] = [
     artists: ['Marcin Przybyłowicz'],
     album: 'The Witcher 3: Wild Hunt (Official Soundtrack)',
     audioFilePath: theTrailMp3,
-    coverPath: null,
+    coverPath: theWitcher3OstCoverPng,
     explicit: false,
     duration: 2 * 60 + 50,
     release_date: new Date('August 26, 2015 00:00:00').toString()
@@ -28,7 +32,7 @@ export const tracks: Track[] = [
     artists: ['Marcin Przybyłowicz', 'Geralt Of Rivia'],
     album: 'The Witcher 3: Wild Hunt - Hearts of Stone (Official Soundtrack)',
     audioFilePath: heartsOfStoneMp3,
-    coverPath: null,
+    coverPath: theWitcher3HosOstCoverPng,
     explicit: true,
     duration: 105,
     release_date: new Date('October 13, 2015 00:00:00').toString()
@@ -39,7 +43,7 @@ export const tracks: Track[] = [
     artists: ['Marcin Przybyłowicz'],
     album: 'The Witcher 3: Wild Hunt (Official Soundtrack)',
     audioFilePath: silverForMonstersMp3,
-    coverPath: null,
+    coverPath: theWitcher3OstCoverPng,
     explicit: true,
     duration: 60 * 2 + 16,
     release_date: new Date('August 26, 2015 00:00:00').toString()
@@ -50,7 +54,7 @@ export const tracks: Track[] = [
     artists: ['Marcin Przybyłowicz'],
     album: 'The Witcher 3: Wild Hunt (Official Soundtrack)',
     audioFilePath: steelForHumansMp3,
-    coverPath: null,
+    coverPath: theWitcher3OstCoverPng,
     explicit: false,
     duration: 87,
     release_date: new Date('August 26, 2015 00:00:00').toString()
@@ -61,7 +65,7 @@ export const tracks: Track[] = [
     artists: ['Yuka Kitamura'],
     album: 'Elden Ring (Official Game Soundtrack)',
     audioFilePath: maleniaBladeOfMiquellaMp3,
-    coverPath: null,
+    coverPath: eldenRingOstCoverPng,
     explicit: false,
     duration: 60 * 3 + 44,
     release_date: new Date('September 9, 2022 00:00:00').toString()
@@ -72,7 +76,7 @@ export const tracks: Track[] = [
     artists: ['Tai Tomisawa'],
     album: 'Elden Ring (Official Game Soundtrack)',
     audioFilePath: godfreyFirstEldenLordMp3,
-    coverPath: null,
+    coverPath: eldenRingOstCoverPng,
     explicit: false,
     duration: 60 * 3 + 16,
     release_date: new Date('September 9, 2022 00:00:00').toString()
@@ -83,7 +87,7 @@ export const tracks: Track[] = [
     artists: ['Tsukaha Saitoh'],
     album: 'Elden Ring (Official Game Soundtrack)',
     audioFilePath: theFinalBattleMp3,
-    coverPath: null,
+    coverPath: eldenRingOstCoverPng,
     explicit: false,
     duration: 60 * 4 + 58,
     release_date: new Date('September 9, 2022 00:00:00').toString()
