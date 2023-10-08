@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom/client'
 
 import { App } from './App'
 import { store } from '@store/store.ts'
+import { DOM_ROOT_ID } from '@shared/const.ts'
 import './index.css'
 
-const ROOT_ID_SELECTOR = '#root'
-const rootElement = document.querySelector(ROOT_ID_SELECTOR) as HTMLElement
+const rootElement = document.querySelector(DOM_ROOT_ID) as HTMLElement
 const appRoot = ReactDOM.createRoot(rootElement)
 
 appRoot.render(
