@@ -6,6 +6,9 @@ const tailwindConfig = {
       screens: {
         'max-mobile': {
           max: '475px'
+        },
+        'max-600px': {
+          max: '600px'
         }
       },
       transitionDuration: {
