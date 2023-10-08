@@ -6,6 +6,7 @@ import {
   type MouseEvent
 } from 'react'
 import { useSelector } from 'react-redux'
+import { twJoin } from 'tailwind-merge'
 
 import { Portal } from '@components/Portal.tsx'
 import { Timeline } from './Timeline'
@@ -154,7 +155,12 @@ export function AudioPlayer() {
 
   return (
     <Portal>
-      <section className='z-50 h-[var(--audio-player-height)] w-screen bg-white shadow'>
+      <section
+        className={twJoin(
+          'fixed bottom-0 z-50 bg-white shadow',
+          'h-[var(--audio-player-height)] w-screen'
+        )}
+      >
         <audio
           ref={audioRef}
           src={currentTrack?.audioFilePath}
