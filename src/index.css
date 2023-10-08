@@ -28,3 +28,10 @@ input:focus,
 button:focus {
   outline: none;
 }
+
+@layer components {
+  .triangle:before {
+    @apply absolute block h-0 w-0 content-[''];
+    @apply border-r-6 border-y-6 border-solid border-y-transparent border-r-neutral-800;
+  }
+}

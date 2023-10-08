@@ -13,6 +13,9 @@ const tailwindConfig = {
       },
       transitionDuration: {
         50: '50ms'
+      },
+      borderWidth: {
+        6: '6px'
       }
     }
   },
