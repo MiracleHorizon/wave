@@ -69,7 +69,8 @@ export function VolumeSlider({ isHover }: Props) {
             style={sliderContainerStyle}
             className={twJoin(
               'relative left-0 h-[44px] w-[200px] min-w-[200px] rounded-[6px]',
-              'z-10 flex origin-top-left items-center justify-center bg-neutral-800'
+              'z-10 flex origin-top-left items-center justify-center bg-neutral-800',
+              'triangle [&:before]:left-[-6px]'
             )}
           >
             <div className='relative flex w-full items-center justify-center px-[16px]'>
