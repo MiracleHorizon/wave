@@ -1,8 +1,9 @@
 {
-  "name": "a.player",
+  "name": "wave",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "author": "MiracleHorizon",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
