@@ -1,16 +1,19 @@
-import { useSelector } from 'react-redux'
+import { twMerge } from 'tailwind-merge'
 
 import { TrackItem } from './TrackItem'
-import { selectTracks } from '@store/slices/tracks'
+import type { Track } from '@interfaces/Track.ts'
+import type { ClassNameProps } from '@interfaces/ClassNameProps.ts'
 
-export function TrackList() {
-  const tracks = useSelector(selectTracks)
-
+export function TrackList({ tracks, className }: Props) {
   return (
-    <ul className='w-full px-[12px] py-[14px]'>
+    <ul className={twMerge('w-full', className)}>
       {tracks.map((track, index) => (
         <TrackItem key={track.id} track={track} index={index} />
       ))}
     </ul>
   )
+}
+
+interface Props extends ClassNameProps {
+  tracks: Track[]
 }

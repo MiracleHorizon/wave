@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  --audio-player-height: 80px;
   /* Track */
   --trackInfoBlockMarginX: 4px;
   --trackControlWidth: 32px;
@@ -28,10 +29,15 @@ input:focus,
 button:focus {
   outline: none;
 }
+li,
+ul,
+ol {
+  list-style: none;
+}
 
 @layer components {
   .triangle:before {
     @apply absolute block h-0 w-0 content-[''];
-    @apply border-r-6 border-y-6 border-solid border-y-transparent border-r-neutral-800;
+    @apply border-y-6 border-r-6 border-solid border-y-transparent border-r-neutral-800;
   }
 }

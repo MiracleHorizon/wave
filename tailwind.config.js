@@ -15,7 +15,14 @@ const tailwindConfig = {
         50: '50ms'
       },
       borderWidth: {
+        1: '1px',
         6: '6px'
+      },
+      zIndex: {
+        100: 100
+      },
+      opacity: {
+        45: '45%'
       }
     }
   },

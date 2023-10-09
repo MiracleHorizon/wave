@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { TrackControls } from './TrackControls'
 import { QueueControls } from './QueueControls'
 import { VolumeControl } from './VolumeControl'
+import { QueueButton } from './QueueButton.tsx'
 import { TrackDetails } from '@components/TrackDetails.tsx'
 import { selectCurrentTrack } from '@store/slices/queue'
 
@@ -12,12 +13,13 @@ function AudioControls({ handlePlayToggle }: Props) {
 
   return (
     <div className='flex w-full flex-1 items-center justify-between px-[12px]'>
-      <div className='flex'>
+      <div className='flex items-center'>
         <TrackControls handlePlayToggle={handlePlayToggle} />
+        <QueueButton className='ml-[10px]' />
         {currentTrack && (
           <TrackDetails
             {...currentTrack}
-            className='max-600px:hidden ml-[10px]'
+            className='ml-[16px] max-600px:hidden'
           />
         )}
       </div>

@@ -6,7 +6,9 @@ import {
   type MouseEvent
 } from 'react'
 import { useSelector } from 'react-redux'
+import { twJoin } from 'tailwind-merge'
 
+import { Portal } from '@components/Portal.tsx'
 import { Timeline } from './Timeline'
 import { AudioControls } from './Controls'
 import {
@@ -152,20 +154,27 @@ export function AudioPlayer() {
   }, [volume, isVolumeMuted])
 
   return (
-    <section className='mt-[24px] h-[80px] w-screen bg-white shadow'>
-      <audio
-        ref={audioRef}
-        src={currentTrack?.audioFilePath}
-        onTimeUpdate={handleTimeUpdate}
-      />
-      <div className='flex h-full w-full flex-col'>
-        <Timeline
-          ref={timelineRef}
-          currentTimePercent={currentTimePercent}
-          handleTimelineClick={handleTimelineClick}
+    <Portal>
+      <section
+        className={twJoin(
+          'fixed bottom-0 z-50 bg-white shadow',
+          'h-[var(--audio-player-height)] w-screen'
+        )}
+      >
+        <audio
+          ref={audioRef}
+          src={currentTrack?.audioFilePath}
+          onTimeUpdate={handleTimeUpdate}
         />
-        <AudioControls handlePlayToggle={handlePlayToggle} />
-      </div>
-    </section>
+        <div className='flex h-full w-full flex-col'>
+          <Timeline
+            ref={timelineRef}
+            currentTimePercent={currentTimePercent}
+            handleTimelineClick={handleTimelineClick}
+          />
+          <AudioControls handlePlayToggle={handlePlayToggle} />
+        </div>
+      </section>
+    </Portal>
   )
 }

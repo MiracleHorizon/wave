@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+import { Overlay } from '@components/modals/Overlay.tsx'
 import { TrackList } from '@components/widgets/TrackList'
 import { selectIsTracksEmpty, useTrackActions } from '@store/slices/tracks'
 import { useQueueActions } from '@store/slices/queue'
@@ -19,7 +20,8 @@ export function Home() {
 
   return (
     <div className='h-full w-full'>
-      <TrackList />
+      <Overlay />
+      <TrackList tracks={tracks} className='px-[12px] py-[14px]' />
     </div>
   )
 }
