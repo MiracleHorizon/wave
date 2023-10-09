@@ -12,8 +12,8 @@ export const uiSlice = createSlice({
   initialState,
 
   reducers: {
-    openQueueModal(state) {
-      state.isQueueModalOpen = true
+    toggleQueueModal(state) {
+      state.isQueueModalOpen = !state.isQueueModalOpen
     },
 
     closeQueueModal(state) {

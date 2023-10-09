@@ -29,6 +29,11 @@ input:focus,
 button:focus {
   outline: none;
 }
+li,
+ul,
+ol {
+  list-style: none;
+}
 
 @layer components {
   .triangle:before {
