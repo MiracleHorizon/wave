@@ -8,6 +8,7 @@ import steelForHumansMp3 from '@assets/audio/steel_for_humans.mp3'
 import maleniaBladeOfMiquellaMp3 from '@assets/audio/malenia_blade_of_miquella.mp3'
 import godfreyFirstEldenLordMp3 from '@assets/audio/godfrey_first_elden_lord.mp3'
 import theFinalBattleMp3 from '@assets/audio/the_final_battle.mp3'
+import chippinInMp3 from '@assets/audio/samurai_chippin_in.mp3'
 
 import eldenRingOstCoverPng from './elden_ring_ost_cover.png'
 import theWitcher3OstCoverPng from './the_witcher_3_ost_cover.png'
@@ -91,5 +92,16 @@ export const tracks: Track[] = [
     explicit: false,
     duration: 60 * 4 + 58,
     release_date: new Date('September 9, 2022 00:00:00').toString()
+  },
+  {
+    id: v4(),
+    title: 'Chippin` In',
+    artists: ['SAMURAI', 'Refused'],
+    album: 'Chippin In',
+    audioFilePath: chippinInMp3,
+    coverPath: null,
+    explicit: false,
+    duration: 60 * 3 + 33,
+    release_date: new Date('July 2, 2019 00:00:00').toString()
   }
 ]
