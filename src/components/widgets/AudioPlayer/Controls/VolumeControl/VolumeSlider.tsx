@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux'
 import { twJoin } from 'tailwind-merge'
 import {
-  motion,
   AnimatePresence,
   type AnimationProps,
+  motion,
   type Target
 } from 'framer-motion'
 import type { ChangeEvent, CSSProperties } from 'react'
@@ -12,9 +12,9 @@ import { RangeSlider } from '@ui/RangeSlider'
 import {
   MAX_VOLUME,
   MIN_VOLUME,
-  useQueueActions,
+  selectIsVolumeMuted,
   selectVolume,
-  selectIsVolumeMuted
+  useQueueActions
 } from '@store/slices/queue'
 
 const rootStyle: CSSProperties = {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { twJoin } from 'tailwind-merge'
 
@@ -7,11 +7,12 @@ import { IconVolumeHigh } from '@ui/icons/IconVolumeHigh.tsx'
 import { IconVolumeMute } from '@ui/icons/IconVolumeMute.tsx'
 import { VolumeSlider } from './VolumeSlider.tsx'
 import {
-  useQueueActions,
-  selectVolume,
-  selectIsVolumeMuted,
+  MAX_VOLUME,
   MIN_AUDIO_VOLUME,
-  HIGH_VOLUME_THRESHOLD
+  MIN_VOLUME,
+  selectIsVolumeMuted,
+  selectVolume,
+  useQueueActions
 } from '@store/slices/queue'
 
 export function VolumeControl() {
@@ -21,10 +22,10 @@ export function VolumeControl() {
   const isMuted = useSelector(selectIsVolumeMuted)
   const { toggleVolumeMute } = useQueueActions()
 
-  const isLowVolume =
-    volume > MIN_AUDIO_VOLUME && volume < HIGH_VOLUME_THRESHOLD
-  const isHighVolume =
-    volume > MIN_AUDIO_VOLUME && volume >= HIGH_VOLUME_THRESHOLD
+  const { isLowVolume, isHighVolume } = useMemo(
+    () => calcVolumeStatus(volume),
+    [volume]
+  )
 
   const handleToggleVolumeMute = () => toggleVolumeMute()
   const handleMouseEnter = () => setHover(true)
@@ -56,4 +57,13 @@ export function VolumeControl() {
       <VolumeSlider isHover={isHover} />
     </div>
   )
+}
+
+function calcVolumeStatus(volume: number) {
+  const highVolumeThreshold = (MAX_VOLUME - MIN_VOLUME) / 2 + MIN_VOLUME
+
+  return {
+    isLowVolume: volume > MIN_AUDIO_VOLUME && volume < highVolumeThreshold,
+    isHighVolume: volume > MIN_AUDIO_VOLUME && volume >= highVolumeThreshold
+  }
 }
