@@ -67,10 +67,43 @@ export const queueSlice = createSlice({
       }
     },
     endCurrentTrack(state) {
+      const queue = state.withShuffle ? state.shuffledQueue : state.queue
+      if (queue.length === 0) return
+
       const currentTrack = state.currentTrack
       if (!currentTrack) return
 
-      state.currentTrack = null
+      const isLastInQueue = queue[queue.length - 1].id === currentTrack.id
+      if (isLastInQueue) {
+        /**
+         * If "repeatMode" === RepeatMode.NO_REPEAT and "shuffle" is enabled,
+         * then after playing the last track the queue will shuffle and
+         * playback of the new first track will begin.
+         */
+        if (state.repeatMode === RepeatMode.NO_REPEAT && state.withShuffle) {
+          state.shuffledQueue = shuffle(state.shuffledQueue)
+        }
+
+        const firstTrack = (
+          state.withShuffle ? state.shuffledQueue : state.queue
+        )[0]
+
+        firstTrack.isPlaying = true
+        state.currentTrack = firstTrack
+      } else {
+        const currentTrackIndex = queue
+          .map(track => track.id)
+          .indexOf(currentTrack.id)
+
+        const nextTrack = queue[currentTrackIndex + 1]
+        if (!nextTrack) return
+
+        nextTrack.isPlaying = true
+        state.currentTrack = nextTrack
+      }
+
+      state.currentTime = 0
+      state.pausedTime = 0
     },
     stopCurrentTrack(state) {
       const currentTrack = state.currentTrack
@@ -170,9 +203,18 @@ export const queueSlice = createSlice({
       /**
        * The shuffle order changes after each option toggle.
        */
-      if (state.withShuffle) {
+      if (!state.withShuffle) return
+
+      const currentTrack = state.currentTrack
+      if (!currentTrack) {
         state.shuffledQueue = shuffle(state.queue)
+        return
       }
+
+      state.shuffledQueue = [
+        currentTrack,
+        ...shuffle(state.queue.filter(track => track.id !== currentTrack.id))
+      ]
     },
     toggleRepeatMode(state) {
       const repeatModes = Object.values(RepeatMode).filter(
