@@ -5,4 +5,8 @@ const postCssConfig = {
   }
 }
 
+if (process.env.NODE_ENV === 'production') {
+  postCssConfig.plugins.cssnano = {}
+}
+
 export default postCssConfig
