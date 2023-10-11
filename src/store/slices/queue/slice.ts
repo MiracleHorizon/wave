@@ -170,9 +170,18 @@ export const queueSlice = createSlice({
       /**
        * The shuffle order changes after each option toggle.
        */
-      if (state.withShuffle) {
+      if (!state.withShuffle) return
+
+      const currentTrack = state.currentTrack
+      if (!currentTrack) {
         state.shuffledQueue = shuffle(state.queue)
+        return
       }
+
+      state.shuffledQueue = [
+        currentTrack,
+        ...shuffle(state.queue.filter(track => track.id !== currentTrack.id))
+      ]
     },
     toggleRepeatMode(state) {
       const repeatModes = Object.values(RepeatMode).filter(
