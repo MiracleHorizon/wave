@@ -11,6 +11,7 @@ import { twJoin } from 'tailwind-merge'
 import { Portal } from '@components/Portal.tsx'
 import { Timeline } from './Timeline'
 import { AudioControls } from './Controls'
+import { useMediaSession } from '@hooks/useMediaSession.ts'
 import {
   useQueueActions,
   selectCurrentTrack,
@@ -40,6 +41,8 @@ export function AudioPlayer() {
     setPausedTime,
     resetPausedTime
   } = useQueueActions()
+
+  useMediaSession()
 
   const handlePlayToggle = useCallback(() => {
     if (!currentTrack) return
@@ -97,7 +100,6 @@ export function AudioPlayer() {
       endCurrentTrack()
     }
 
-    audio.load()
     audio.addEventListener('ended', handleEnd)
 
     return () => {
@@ -117,7 +119,7 @@ export function AudioPlayer() {
           resetPausedTime()
         }
 
-        audio.play().then(resetPausedTime)
+        audio.play()
       } else {
         audio.pause()
       }

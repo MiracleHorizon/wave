@@ -48,6 +48,9 @@
       "@store/*": [
         "./src/store/*"
       ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
       "@shared/*": [
         "./src/shared/*"
       ],
