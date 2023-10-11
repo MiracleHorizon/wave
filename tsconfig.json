@@ -48,6 +48,9 @@
       "@store/*": [
         "./src/store/*"
       ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
       "@shared/*": [
         "./src/shared/*"
       ],
@@ -59,6 +62,9 @@
       ],
       "@interfaces/*": [
         "./src/shared/interfaces/*"
+      ],
+      "@enums/*": [
+        "./src/shared/enums/*"
       ],
       "@components/*": [
         "./src/components/*"

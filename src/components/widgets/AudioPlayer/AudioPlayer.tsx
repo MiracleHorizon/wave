@@ -1,39 +1,42 @@
 import {
+  type MouseEvent,
   useCallback,
   useEffect,
   useRef,
-  useState,
-  type MouseEvent
+  useState
 } from 'react'
 import { useSelector } from 'react-redux'
+import { useEventListener } from 'usehooks-ts'
 import { twJoin } from 'tailwind-merge'
 
 import { Portal } from '@components/Portal.tsx'
 import { Timeline } from './Timeline'
 import { AudioControls } from './Controls'
+import { useMediaSession } from '@hooks/useMediaSession.ts'
 import {
-  useQueueActions,
-  selectCurrentTrack,
   selectCurrentTime,
+  selectCurrentTrack,
+  selectIsVolumeMuted,
   selectPausedTime,
   selectVolume,
-  selectIsVolumeMuted
+  useQueueActions
 } from '@store/slices/queue'
+import { KeyboardCode } from '@enums/KeyboardCode.ts'
 
 export function AudioPlayer() {
   const [currentTimePercent, setCurrentTimePercent] = useState(0)
-
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const timelineRef = useRef<HTMLDivElement>(null)
-
   const currentTrack = useSelector(selectCurrentTrack)
   const currentTime = useSelector(selectCurrentTime)
   const pausedTime = useSelector(selectPausedTime)
   const volume = useSelector(selectVolume)
   const isVolumeMuted = useSelector(selectIsVolumeMuted)
 
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const timelineRef = useRef<HTMLDivElement>(null)
+
   const {
     playCurrentTrack,
+    stopCurrentTrack,
     pauseCurrentTrack,
     endCurrentTrack,
     setCurrentTime,
@@ -41,19 +44,17 @@ export function AudioPlayer() {
     resetPausedTime
   } = useQueueActions()
 
-  const handlePlayToggle = useCallback(() => {
-    if (!currentTrack) return
+  const { isMediaSessionSupported } = useMediaSession()
 
-    try {
-      if (currentTrack.isPlaying) {
-        pauseCurrentTrack()
-      } else {
-        playCurrentTrack()
-      }
-    } catch {
+  const handlePlayToggle = useCallback(() => {
+    if (!audioRef.current || !currentTrack) return
+
+    if (!currentTrack.isPlaying) {
+      playCurrentTrack()
+    } else {
       pauseCurrentTrack()
     }
-  }, [currentTrack, pauseCurrentTrack, playCurrentTrack])
+  }, [currentTrack, playCurrentTrack, pauseCurrentTrack])
 
   const handleTimelineClick = useCallback(
     (ev: MouseEvent) => {
@@ -65,7 +66,7 @@ export function AudioPlayer() {
       const clientRect = timelineElement.getBoundingClientRect()
       const progressPosition = ev.clientX - clientRect.left
       const progressPercent = progressPosition / clientRect.width
-      const clickedTime = progressPercent * audio.duration
+      const clickedTime = Math.floor(progressPercent * audio.duration)
 
       audio.currentTime = clickedTime
       setCurrentTimePercent(progressPercent)
@@ -81,29 +82,29 @@ export function AudioPlayer() {
     const audio = audioRef.current
 
     if (!audio || !currentTrack) return
-    if (currentTime !== 0 && audio.currentTime === 0) return
+    if (audio.currentTime === 0 && currentTime !== 0) return
 
     setCurrentTime(audio.currentTime)
     setCurrentTimePercent(audio.currentTime / (currentTrack.duration / 100))
   }
 
-  useEffect(() => {
+  const handleEnded = () => {
     const audio = audioRef.current
 
-    if (!audio || !currentTrack) return
+    if (!audio || !audio.ended || !currentTrack) return
 
-    const handleEnd = () => {
-      audio.currentTime = 0
-      endCurrentTrack()
+    audio.currentTime = 0
+    endCurrentTrack()
+  }
+
+  const handleKeyboardTogglePlay = (ev: KeyboardEvent) => {
+    if (ev.code === KeyboardCode.SPACE) {
+      handlePlayToggle()
     }
+  }
 
-    audio.load()
-    audio.addEventListener('ended', handleEnd)
-
-    return () => {
-      audio.removeEventListener('ended', handleEnd)
-    }
-  }, [currentTrack, endCurrentTrack])
+  useEventListener('ended', handleEnded, audioRef)
+  useEventListener('keydown', handleKeyboardTogglePlay)
 
   useEffect(() => {
     const audio = audioRef.current
@@ -112,38 +113,38 @@ export function AudioPlayer() {
 
     try {
       if (currentTrack.isPlaying) {
-        if (pausedTime > 0) {
+        if (pausedTime > 0 && pausedTime !== audio.currentTime) {
           audio.currentTime = pausedTime
           resetPausedTime()
         }
 
-        audio.play().then(resetPausedTime)
+        audio.play().then(() => {
+          if (isMediaSessionSupported) {
+            navigator.mediaSession.playbackState = 'playing'
+          }
+        })
       } else {
         audio.pause()
+
+        if (isMediaSessionSupported) {
+          navigator.mediaSession.playbackState = 'paused'
+        }
       }
     } catch {
-      audio.pause()
-      pauseCurrentTrack()
-    }
-  }, [currentTrack, pauseCurrentTrack, pausedTime, resetPausedTime])
-
-  useEffect(() => {
-    const audio = audioRef.current
-
-    if (!audio || !currentTrack) return
-
-    const handleKeyboardTogglePlay = (ev: KeyboardEvent) => {
-      if (ev.code === 'Space') {
-        handlePlayToggle()
+      if (isMediaSessionSupported) {
+        navigator.mediaSession.playbackState = 'none'
       }
-    }
 
-    window.addEventListener('keydown', handleKeyboardTogglePlay)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyboardTogglePlay)
+      audio.currentTime = 0
+      stopCurrentTrack()
     }
-  }, [currentTrack, handlePlayToggle])
+  }, [
+    pausedTime,
+    currentTrack,
+    isMediaSessionSupported,
+    stopCurrentTrack,
+    resetPausedTime
+  ])
 
   useEffect(() => {
     const audio = audioRef.current

@@ -72,6 +72,18 @@ export const queueSlice = createSlice({
 
       state.currentTrack = null
     },
+    stopCurrentTrack(state) {
+      const currentTrack = state.currentTrack
+      if (!currentTrack) return
+
+      const track = state.queue.find(track => track.id === currentTrack.id)
+      if (!track) return
+
+      track.isPlaying = false
+      currentTrack.isPlaying = false
+      state.currentTime = 0
+      state.pausedTime = 0
+    },
     setCurrentTime(state, action: PayloadAction<number>) {
       state.currentTime = action.payload
     },
@@ -79,7 +91,9 @@ export const queueSlice = createSlice({
       state.pausedTime = action.payload
     },
     resetPausedTime(state) {
-      state.pausedTime = initialState.pausedTime
+      if (state.pausedTime !== initialState.pausedTime) {
+        state.pausedTime = initialState.pausedTime
+      }
     },
     setVolume(state, action: PayloadAction<number>) {
       const value = action.payload
@@ -130,6 +144,7 @@ export const queueSlice = createSlice({
 
       nextTrack.isPlaying = true
       state.currentTrack = nextTrack
+      state.currentTime = 0
     },
     skipBackward(state) {
       const queue = state.withShuffle ? state.shuffledQueue : state.queue
@@ -147,6 +162,7 @@ export const queueSlice = createSlice({
 
       prevTrack.isPlaying = true
       state.currentTrack = prevTrack
+      state.currentTime = 0
     },
     toggleShuffle(state) {
       state.withShuffle = !state.withShuffle
