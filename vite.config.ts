@@ -16,6 +16,7 @@ const aliases: Alias[] = [
   { find: '@ui', path: './src/shared/ui' },
   { find: '@helpers', path: './src/shared/helpers' },
   { find: '@interfaces', path: './src/shared/interfaces' },
+  { find: '@enums', path: './src/shared/enums' },
   { find: '@components', path: './src/components' },
   { find: '@layouts', path: './src/layouts' }
 ]

@@ -1,8 +1,10 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense } from 'react'
 import { useSelector } from 'react-redux'
+import { useEventListener } from 'usehooks-ts'
 import { AnimatePresence } from 'framer-motion'
 
-import { useUiActions, selectIsQueueModalOpen } from '@store/slices/ui'
+import { selectIsQueueModalOpen, useUiActions } from '@store/slices/ui'
+import { KeyboardCode } from '@enums/KeyboardCode.ts'
 
 const QueueModalContent = lazy(() =>
   import('./QueueModalContent.tsx').then(module => ({
@@ -14,19 +16,11 @@ export function QueueModal() {
   const isOpen = useSelector(selectIsQueueModalOpen)
   const { closeQueueModal } = useUiActions()
 
-  useEffect(() => {
-    const handleKeydown = (ev: KeyboardEvent) => {
-      if (ev.code === 'Escape') {
-        closeQueueModal()
-      }
+  useEventListener('keydown', (ev: KeyboardEvent) => {
+    if (ev.code === KeyboardCode.ESCAPE) {
+      closeQueueModal()
     }
-
-    window.addEventListener('keydown', handleKeydown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeydown)
-    }
-  }, [closeQueueModal])
+  })
 
   return (
     <Suspense>

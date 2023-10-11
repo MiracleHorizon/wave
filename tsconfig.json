@@ -63,6 +63,9 @@
       "@interfaces/*": [
         "./src/shared/interfaces/*"
       ],
+      "@enums/*": [
+        "./src/shared/enums/*"
+      ],
       "@components/*": [
         "./src/components/*"
       ],
