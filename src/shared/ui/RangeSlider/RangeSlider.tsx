@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties, type InputHTMLAttributes } from 'react'
+import { type CSSProperties, type InputHTMLAttributes, useMemo } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import styles from './RangeSlider.module.css'

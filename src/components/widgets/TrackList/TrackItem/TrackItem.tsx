@@ -7,9 +7,9 @@ import { TrackArtists } from './TrackArtists'
 import { TrackDuration } from './TrackDuration'
 import { useTypedSelector } from '@store/hooks/useTypedSelector.ts'
 import {
-  useQueueActions,
   selectIsTrackCurrent,
-  selectIsTrackPlaying
+  selectIsTrackPlaying,
+  useQueueActions
 } from '@store/slices/queue'
 import type { Track } from '@interfaces/Track.ts'
 

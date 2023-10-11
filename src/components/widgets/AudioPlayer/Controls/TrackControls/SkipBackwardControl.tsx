@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { IconBackward } from '@ui/icons/IconBackward.tsx'
 import { ControlButton } from '../ControlButton.tsx'
 import {
-  useQueueActions,
-  selectIsBackwardSkipAvailable
+  selectIsBackwardSkipAvailable,
+  useQueueActions
 } from '@store/slices/queue'
 
 export function SkipBackwardControl() {

@@ -1,6 +1,6 @@
 import {
-  memo,
   type FocusEvent,
+  memo,
   type MouseEvent,
   type PropsWithChildren
 } from 'react'
