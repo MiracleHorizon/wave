@@ -22,7 +22,8 @@ const tailwindConfig = {
         100: 100
       },
       opacity: {
-        45: '45%'
+        45: '45%',
+        85: '85%'
       }
     }
   },

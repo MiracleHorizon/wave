@@ -10,7 +10,7 @@ function Time({ value, className }: Props) {
         twJoin(
           'absolute top-0 flex items-center justify-center text-[11px]',
           'z-[20] h-full text-white opacity-0 group-hover:opacity-100',
-          'duration-50 transition-opacity ease-in'
+          'transition-opacity duration-50 ease-in'
         ),
         className
       )}

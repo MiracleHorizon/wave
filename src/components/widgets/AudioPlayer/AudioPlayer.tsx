@@ -151,19 +151,20 @@ export function AudioPlayer() {
 
     if (!audio) return
 
-    audio.volume = isVolumeMuted ? 0 : volume
-  }, [volume, isVolumeMuted])
+    audio.volume = volume
+  }, [volume])
 
   return (
     <Portal>
       <section
         className={twJoin(
-          'fixed bottom-0 z-50 bg-white shadow',
+          'bg-[rgb(255,255,255)]/85 fixed bottom-0 z-50 shadow',
           'h-[var(--audio-player-height)] w-screen'
         )}
       >
         <audio
           ref={audioRef}
+          muted={isVolumeMuted}
           src={currentTrack?.audioFilePath}
           onTimeUpdate={handleTimeUpdate}
         />

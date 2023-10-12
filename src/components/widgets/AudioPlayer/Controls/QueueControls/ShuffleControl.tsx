@@ -4,9 +4,9 @@ import { IconShuffle } from '@ui/icons/IconShuffle.tsx'
 import { IconShuffleOn } from '@ui/icons/IconShuffleOn.tsx'
 import { ControlButton } from '../ControlButton.tsx'
 import {
-  useQueueActions,
   selectIsQueueEmpty,
-  selectWithShuffle
+  selectWithShuffle,
+  useQueueActions
 } from '@store/slices/queue'
 
 export function ShuffleControl() {
