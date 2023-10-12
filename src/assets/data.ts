@@ -34,7 +34,7 @@ export const tracks: Track[] = [
     album: 'The Witcher 3: Wild Hunt - Hearts of Stone (Official Soundtrack)',
     audioFilePath: heartsOfStoneMp3,
     coverPath: theWitcher3HosOstCoverPng,
-    explicit: true,
+    explicit: false,
     duration: 105,
     release_date: new Date('October 13, 2015 00:00:00').toString()
   },
@@ -45,7 +45,7 @@ export const tracks: Track[] = [
     album: 'The Witcher 3: Wild Hunt (Official Soundtrack)',
     audioFilePath: silverForMonstersMp3,
     coverPath: theWitcher3OstCoverPng,
-    explicit: true,
+    explicit: false,
     duration: 60 * 2 + 16,
     release_date: new Date('August 26, 2015 00:00:00').toString()
   },
@@ -100,7 +100,7 @@ export const tracks: Track[] = [
     album: 'Chippin In',
     audioFilePath: chippinInMp3,
     coverPath: null,
-    explicit: false,
+    explicit: true,
     duration: 60 * 3 + 33,
     release_date: new Date('July 2, 2019 00:00:00').toString()
   }

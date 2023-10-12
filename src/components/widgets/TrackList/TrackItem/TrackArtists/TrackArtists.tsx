@@ -1,16 +1,23 @@
 import { Fragment, memo, type MouseEvent } from 'react'
+import { twJoin } from 'tailwind-merge'
 
+import { ExplicitBadge } from '@components/ExplicitBadge.tsx'
 import type { PlayerTrack } from '@interfaces/PlayerTrack.ts'
 import styles from './TrackArtists.module.css'
 
-function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
+function TrackArtists({ artists, explicit }: Props) {
   function handleArtistClick(ev: MouseEvent) {
     ev.stopPropagation()
   }
 
   return (
     <div className={styles.root}>
-      <span className='block w-full truncate text-left'>
+      <span
+        className={twJoin(
+          'block truncate text-left',
+          explicit ? 'w-[calc(100%-18px-4px)]' : 'w-full'
+        )}
+      >
         {artists.map((artist, artistIndex) => (
           <Fragment key={artist}>
             <a
@@ -24,6 +31,7 @@ function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
           </Fragment>
         ))}
       </span>
+      {explicit && <ExplicitBadge className={twJoin('mx-[2px]')} />}
     </div>
   )
 }
@@ -31,3 +39,5 @@ function TrackArtists({ artists }: Pick<PlayerTrack, 'artists'>) {
 const MemoizedTrackArtists = memo(TrackArtists)
 
 export { MemoizedTrackArtists as TrackArtists }
+
+type Props = Pick<PlayerTrack, 'artists' | 'explicit'>

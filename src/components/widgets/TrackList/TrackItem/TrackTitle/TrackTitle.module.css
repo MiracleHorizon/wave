@@ -1,4 +1,6 @@
 .root {
+  @apply h-full flex items-center;
+
   width: var(--trackTitleInfoWidth);
   min-width: var(--trackTitleInfoWidth);
 }
