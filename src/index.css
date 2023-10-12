@@ -4,6 +4,7 @@
 
 :root {
   --audio-player-height: 80px;
+  --explicit-badge-size: 18px;
   /* Track */
   --trackInfoBlockMarginX: 4px;
   --trackControlWidth: 32px;
@@ -20,7 +21,7 @@
   :root {
     --trackArtistsWidth: calc(
       100% - var(--trackTitleInfoWidth) - var(--trackControlWidth) -
-        var(--trackInfoBlockMarginX)
+        calc(var(--trackInfoBlockMarginX) * 2)
     );
   }
 }

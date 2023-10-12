@@ -10,12 +10,7 @@ const iconClassName: string = 'w-[26px] h-[26px]'
 
 function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
   return (
-    <div
-      className={twJoin(
-        styles.root,
-        'flex h-full items-center justify-center text-gray-600'
-      )}
-    >
+    <div className={styles.root}>
       {isCurrentTrack ? (
         <>
           <span className='hidden group-hover:inline-block'>
@@ -26,7 +21,12 @@ function TrackControl({ order, isPlaying, isCurrentTrack }: Props) {
             )}
           </span>
           {isPlaying ? (
-            <div className='h-[10px] w-[10px] animate-pulse rounded-full bg-yellow-300 group-hover:hidden' />
+            <div
+              className={twJoin(
+                'h-[10px] w-[10px] animate-pulse rounded-full',
+                'bg-yellow-300 group-hover:hidden'
+              )}
+            />
           ) : (
             <span className='inline-block group-hover:hidden'>{order}</span>
           )}

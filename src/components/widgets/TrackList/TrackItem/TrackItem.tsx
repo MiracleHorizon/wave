@@ -55,7 +55,7 @@ function TrackItem({ track, index }: Props) {
         isCurrentTrack={isCurrentTrack}
       />
       <TrackTitle title={track.title} />
-      <TrackArtists artists={track.artists} />
+      <TrackArtists artists={track.artists} explicit={track.explicit} />
       <TrackDuration duration={track.duration} />
     </li>
   )

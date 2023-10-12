@@ -99,6 +99,7 @@ export function AudioPlayer() {
 
   const handleKeyboardTogglePlay = (ev: KeyboardEvent) => {
     if (ev.code === KeyboardCode.SPACE) {
+      ev.preventDefault()
       handlePlayToggle()
     }
   }

@@ -1,4 +1,6 @@
 .root {
+  @apply relative h-full flex items-center;
+
   width: var(--trackArtistsWidth);
   min-width: var(--trackArtistsWidth);
   margin-left: var(--trackInfoBlockMarginX);
