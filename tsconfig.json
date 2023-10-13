@@ -51,6 +51,9 @@
       "@hooks/*": [
         "./src/hooks/*"
       ],
+      "@router/*": [
+        "./src/router/*"
+      ],
       "@shared/*": [
         "./src/shared/*"
       ],
@@ -65,6 +68,9 @@
       ],
       "@enums/*": [
         "./src/shared/enums/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
       ],
       "@components/*": [
         "./src/components/*"
